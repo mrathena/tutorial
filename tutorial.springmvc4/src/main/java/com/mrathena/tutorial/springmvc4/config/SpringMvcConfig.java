@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.mrathena.tutorial.springmvc4")
-public class MvcConfig {
+public class SpringMvcConfig {
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {

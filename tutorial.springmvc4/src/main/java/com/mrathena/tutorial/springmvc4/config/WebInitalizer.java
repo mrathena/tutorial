@@ -17,7 +17,7 @@ public class WebInitalizer implements WebApplicationInitializer {
 		// 新建WebApplicationContext
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		// 注册配置类
-		context.register(MvcConfig.class);
+		context.register(SpringMvcConfig.class);
 		// 将其与当前ServletContext关联
 		context.setServletContext(servletContext); 
 		// 注册SpringMVC的DispatcherServlet
