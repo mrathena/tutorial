@@ -8,21 +8,24 @@
 	<description>Spring 4, Spring MVC 4</description>
 
 	<properties>
-		<!-- project -->
+		<!-- Project -->
 		<encoding>UTF-8</encoding>
 		<java.version>1.8</java.version>
-		<!-- spring -->
-		<spring.version>4.3.9.RELEASE</spring.version>
+		<javaee.version>8.0</javaee.version>
+		<!-- Spring -->
+		<spring.version>4.3.11.RELEASE</spring.version>
 		<aspectj.version>1.8.10</aspectj.version>
-		<!-- junit -->
+		<!-- Junit -->
 		<junit.version>4.12</junit.version>
-		<!-- log -->
+		<!-- Slf4j, Logback -->
 		<slf4j.version>1.7.25</slf4j.version>
 		<logback.version>1.2.3</logback.version>
-		<!-- servlet -->
+		<!-- Servlet, Jsp, Jstl -->
 		<servlet.version>3.1.0</servlet.version>
 		<jsp.version>2.3.1</jsp.version>
 		<jstl.version>1.2.1</jstl.version>
+		<!-- Fastjson -->
+		<fastjson.version>1.2.38</fastjson.version>
 		<!-- <.version></.version> -->
 	</properties>
 
@@ -148,7 +151,7 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
-			<version>8.0</version>
+			<version>${javaee.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -204,6 +207,14 @@
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-access</artifactId>
 		    <version>${logback.version}</version>
+		</dependency>
+		
+		<!-- Fastjson -->
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson.version}</version>
 		</dependency>
 
 		<!-- Junit -->
