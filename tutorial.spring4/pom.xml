@@ -24,7 +24,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>tutorial</finalName>
+		<finalName>tutorial.spring4</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
