@@ -141,6 +141,7 @@
 
 	<modules>
 		<module>tutorial.spring4</module>
+		<module>tutorial.springmvc4</module>
 	</modules>
 
 </project>
