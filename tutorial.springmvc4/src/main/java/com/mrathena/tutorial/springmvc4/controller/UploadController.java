@@ -12,11 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadController {
 
-	// 这两种上传的效率基本相同, 但是第一种比较简单
-
-	@ResponseBody
 	@RequestMapping(value = "upload2", method = RequestMethod.POST)
-	public String upload2(MultipartFile[] files) {
+	public @ResponseBody String upload2(MultipartFile[] files) {
 		try {
 			for (MultipartFile file : files) {
 				FileUtils.writeByteArrayToFile(new File("d:/", file.getOriginalFilename()), file.getBytes());

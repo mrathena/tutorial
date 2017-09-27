@@ -1,8 +1,11 @@
 package com.mrathena.tutorial.springmvc4.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.mrathena.tutorial.springmvc4.config.httpMessageConverter.DemoHttpMessageConverter;
 import com.mrathena.tutorial.springmvc4.config.interceptor.DemoInterceptor;
 
 @Configuration
@@ -36,9 +40,9 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setDefaultEncoding("UTF-8");
 		// 每个文件大小最大值10M(1MB=1024KB=1048576B)
-//		multipartResolver.setMaxUploadSizePerFile(10485760L);
+		// multipartResolver.setMaxUploadSizePerFile(10485760L);
 		// 总大小100M
-//		multipartResolver.setMaxUploadSize(104857600L);
+		// multipartResolver.setMaxUploadSize(104857600L);
 		multipartResolver.setMaxUploadSizePerFile(1048576000L);
 		// 总大小100M
 		multipartResolver.setMaxUploadSize(1048576000L);
@@ -57,7 +61,8 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
 	public void addViewControllers(ViewControllerRegistry registry) {
-		// 纯页面转向(Get方式,不能和@RequestMapping定义重合,会被覆盖)(就是不操作Model的页面跳转Controller)可以直接写在这里, 代码更简洁, 更集中
+		// 纯页面转向(Get方式,不能和@RequestMapping定义重合,会被覆盖)(就是不操作Model的页面跳转Controller)可以直接写在这里,
+		// 代码更简洁, 更集中
 		// addViewController就是绑定uri, setViewName就是返回的view名称(就是jsp名称)
 		registry.addViewController("index2").setViewName("index");
 		registry.addViewController("index3").setViewName("index");
@@ -65,6 +70,21 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addRedirectViewController("index5", "index");
 		// 正式功能
 		registry.addViewController("upload").setViewName("upload");
+		registry.addViewController("converter").setViewName("converter");
+	}
+
+	// 该方法会覆盖SpringMVC默认注册的消息转换器
+	// public void configureMessageConverters(List<HttpMessageConverter<?>>
+	// converters) {}
+
+	// 该方法不会覆盖SpringMVC默认注册的消息转换器, 而是在其基础上添加
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		System.out.println("SpringMVC默认注册的HttpMessageConverter");
+		for (HttpMessageConverter<?> converter : converters) {
+			System.out.println(converter.getClass());
+		}
+		System.out.println("SpringMVC默认注册的HttpMessageConverter");
+		converters.add(new DemoHttpMessageConverter());
 	}
 
 }

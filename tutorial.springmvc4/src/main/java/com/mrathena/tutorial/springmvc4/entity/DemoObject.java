@@ -4,7 +4,16 @@ public class DemoObject {
 
 	private Integer id;
 	private String username;
-	private boolean isMale;
+
+	public DemoObject() {
+		super();
+	}
+
+	public DemoObject(Integer id, String username) {
+		super();
+		this.id = id;
+		this.username = username;
+	}
 
 	public Integer getId() {
 		return id;
@@ -22,17 +31,9 @@ public class DemoObject {
 		this.username = username;
 	}
 
-	public boolean isMale() {
-		return isMale;
-	}
-
-	public void setMale(boolean isMale) {
-		this.isMale = isMale;
-	}
-
 	@Override
 	public String toString() {
-		return "DemoObject [id=" + id + ", username=" + username + ", isMale=" + isMale + "]";
+		return "DemoObject [id=" + id + ", username=" + username + "]";
 	}
 
 }
