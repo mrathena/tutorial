@@ -8,12 +8,6 @@
 	<artifactId>tutorial.spring4</artifactId>
 
 	<dependencies>
-		<!-- commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
-		</dependency>
 		
 		<!-- jsr250-api -->
 		<dependency>
