@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -21,6 +22,7 @@ import com.mrathena.tutorial.springmvc4.config.interceptor.DemoInterceptor;
 
 @Configuration
 @EnableWebMvc // 开启SpringMVC支持, 没有此代码, 重写WebMvcConfigurerAdapter方法无效
+@EnableScheduling // 开启计划任务的支持
 @ComponentScan("com.mrathena.tutorial.springmvc4")
 // 自定义配置需要继承WebMvcConfigurerAdapter类或实现WebMvcConfigurer接口, 两者选一, 具体功能参照API
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
@@ -71,6 +73,8 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		// 正式功能
 		registry.addViewController("upload").setViewName("upload");
 		registry.addViewController("converter").setViewName("converter");
+		registry.addViewController("sse").setViewName("sse");
+		registry.addViewController("async").setViewName("async");
 	}
 
 	// 该方法会覆盖SpringMVC默认注册的消息转换器

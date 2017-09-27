@@ -13,7 +13,7 @@ import com.mrathena.tutorial.spring4.chapter3.test.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
-@ActiveProfiles("production	")
+@ActiveProfiles("production")
 public class DemoBeanIntegrationTests {
 
 	@Autowired
