@@ -3,6 +3,8 @@ package com.mrathena.tutorial.springmvc4.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -29,6 +31,20 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setDefaultEncoding("UTF-8");
+		// 每个文件大小最大值10M(1MB=1024KB=1048576B)
+//		multipartResolver.setMaxUploadSizePerFile(10485760L);
+		// 总大小100M
+//		multipartResolver.setMaxUploadSize(104857600L);
+		multipartResolver.setMaxUploadSizePerFile(1048576000L);
+		// 总大小100M
+		multipartResolver.setMaxUploadSize(1048576000L);
+		return multipartResolver;
+	}
+
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// 注册静态资源处理器
 		// addResourceHandler指的是对外暴露的访问路径, addResourceLocations指的是文件的存放路径
@@ -39,15 +55,16 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		// 注册拦截器
 		registry.addInterceptor(new DemoInterceptor());
 	}
-	
+
 	public void addViewControllers(ViewControllerRegistry registry) {
-		// 纯页面转向(就是不操作Model的页面跳转Controller)可以直接写在这里, 代码更简洁, 更集中
-		// addViewController就是绑定uri, setViewName就是返回的view名称
+		// 纯页面转向(Get方式,不能和@RequestMapping定义重合,会被覆盖)(就是不操作Model的页面跳转Controller)可以直接写在这里, 代码更简洁, 更集中
+		// addViewController就是绑定uri, setViewName就是返回的view名称(就是jsp名称)
 		registry.addViewController("index2").setViewName("index");
 		registry.addViewController("index3").setViewName("index");
-		registry.addViewController("index4").setViewName("index");
 		// addRedirectViewController访问index5, 会让浏览器重新访问index
 		registry.addRedirectViewController("index5", "index");
+		// 正式功能
+		registry.addViewController("upload").setViewName("upload");
 	}
 
 }
